@@ -2,12 +2,9 @@ package org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.r
 
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.dto.Lectures;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-@Repository
 public interface LecturesRepository extends JpaRepository<Lectures, Integer> {
 
-    List<Lectures> findAll();
+    //특강 리스트 조회
+    Lectures findByLectureId(int lectureId);
 }
