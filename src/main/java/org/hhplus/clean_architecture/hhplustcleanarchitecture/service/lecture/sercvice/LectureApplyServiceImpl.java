@@ -23,8 +23,9 @@ public class LectureApplyServiceImpl implements LectureApplyService {
     private final UsersRepository usersRepository;
 
     @Override
-    public void checkLectures() {
-        List<Lectures> lectures = lecturesRepository.findAll();
+    public List<Lectures> checkLectures() {
+
+        return lecturesRepository.findAll();
     }
 
     @Override
@@ -53,7 +54,6 @@ public class LectureApplyServiceImpl implements LectureApplyService {
             lectureHistory.setApply_date(LocalDateTime.now());
 
             lectureHistoryRepository.save(lectureHistory);
-            isApplyComplete(lectureId, userId);
         }
     }
 
@@ -70,7 +70,8 @@ public class LectureApplyServiceImpl implements LectureApplyService {
     }
 
     @Override
-    public void appliedList(int userId) {
-        List<LectureHistory> histories = lectureHistoryRepository.findAllByUserId(userId);
+    public List<LectureHistory> appliedList(int userId) {
+
+        return lectureHistoryRepository.findAllByUserId(userId);
     }
 }

@@ -1,13 +1,17 @@
 package org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.Utils;
+import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.dto.LectureHistory;
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.sercvice.LectureApplyService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("lectures")
@@ -19,7 +23,8 @@ public class LectureApplyController {
     //특강 리스트 조회
     @GetMapping("")
     public void checkLectures() {
-        lectureApplyService.checkLectures();;
+
+        lectureApplyService.checkLectures();
     }
 
     //특강 신청

@@ -3,6 +3,7 @@ package org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.d
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +17,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LectureHistory {
+
     @Id
     private int userId;
     private int lectureId;
     private LocalDateTime apply_date;
+
 }
