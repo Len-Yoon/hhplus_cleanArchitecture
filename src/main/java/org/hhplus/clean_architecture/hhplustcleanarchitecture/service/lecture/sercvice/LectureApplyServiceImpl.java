@@ -1,5 +1,6 @@
 package org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.sercvice;
 
+import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.dto.LectureHistory;
@@ -7,6 +8,10 @@ import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.dt
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.repository.LectureHistoryRepository;
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.repository.LecturesRepository;
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.repository.UsersRepository;
+import org.hibernate.StaleObjectStateException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,10 +28,13 @@ public class LectureApplyServiceImpl implements LectureApplyService {
     private final UsersRepository usersRepository;
 
     @Override
-    public void checkLectures() {
-        List<Lectures> lectures = lecturesRepository.findAll();
+    public List<Lectures> checkLectures() {
+
+        return lecturesRepository.findAll();
     }
 
+    @Retryable(retryFor ={OptimisticLockException.class, StaleObjectStateException.class,
+            ObjectOptimisticLockingFailureException.class}, maxAttempts = 5, backoff = @Backoff(delay = 100))
     @Override
     @Transactional
     public void applyLecture(int lectureId, int userId) {
@@ -53,7 +61,6 @@ public class LectureApplyServiceImpl implements LectureApplyService {
             lectureHistory.setApply_date(LocalDateTime.now());
 
             lectureHistoryRepository.save(lectureHistory);
-            isApplyComplete(lectureId, userId);
         }
     }
 
@@ -70,7 +77,8 @@ public class LectureApplyServiceImpl implements LectureApplyService {
     }
 
     @Override
-    public void appliedList(int userId) {
-        List<LectureHistory> histories = lectureHistoryRepository.findAllByUserId(userId);
+    public List<LectureHistory> appliedList(int userId) {
+
+        return lectureHistoryRepository.findAllByUserId(userId);
     }
 }

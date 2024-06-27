@@ -39,11 +39,9 @@ class LectureApplyControllerTest {
     @Test
     @DisplayName("특강 신청 검증")
     void apply() throws Exception {
-        mockMvc.perform(post("/lectures/apply?lectureId="+1+"&userId="+1))
+        mockMvc.perform(post("/lectures/apply?lectureId="+1+"&userId="+4))
                 .andDo(print())
                 .andExpect(status().isOk());
-
-
 
     }
 
