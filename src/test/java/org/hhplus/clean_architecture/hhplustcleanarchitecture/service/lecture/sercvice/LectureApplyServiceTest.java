@@ -18,7 +18,7 @@ class LectureApplyServiceTest {
     @DisplayName("특강 신청 로직 테스트")
     void applyLecture() {
         int lectureId = 2;
-        int userId = 1;
+        int userId = 2;
 
         lectureApplyService.applyLecture(lectureId, userId);
     }

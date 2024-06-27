@@ -3,6 +3,7 @@ package org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.d
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.*;
 
 
@@ -15,4 +16,7 @@ public class Lectures {
     @Id
     private int lectureId;
     private String lectureName;
+
+    @Version
+    private int version;
 }

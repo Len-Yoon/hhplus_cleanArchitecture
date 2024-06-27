@@ -1,7 +1,9 @@
 package org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.sercvice;
 
+import jakarta.persistence.LockModeType;
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.dto.LectureHistory;
 import org.hhplus.clean_architecture.hhplustcleanarchitecture.service.lecture.dto.Lectures;
+import org.springframework.data.jpa.repository.Lock;
 
 import java.util.List;
 
